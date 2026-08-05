@@ -1,0 +1,33 @@
+/* ═══════════════════════════════════════════════
+   AUTH — Pantalla de Acceso
+   css/auth.css
+═══════════════════════════════════════════════ */
+#page-auth{align-items:center;justify-content:center;padding:2rem;min-height:100vh}
+.auth-wrap{width:100%;max-width:480px;display:flex;flex-direction:column;align-items:center}
+
+/* Brand */
+.auth-brand{text-align:center;margin-bottom:2.5rem;animation:fadeUp .4s var(--ease-out) both}
+.auth-brand-logo{font-family:var(--f-display);font-size:clamp(2.6rem,8vw,3.8rem);color:var(--accent);letter-spacing:.06em;line-height:1;text-shadow:0 0 60px rgba(200,255,0,.35)}
+.auth-brand-tag{margin-top:.5rem;font-size:.68rem;letter-spacing:.28em;text-transform:uppercase;color:var(--text-3);font-family:var(--f-mono)}
+
+/* Card */
+.auth-card{width:100%;background:var(--surface);border:1px solid var(--border2);border-radius:var(--radius-xl);overflow:hidden;box-shadow:var(--shadow-lg);position:relative;animation:fadeUp .5s var(--ease-out) .08s both}
+.auth-card-topline{position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(200,255,0,.45),transparent);z-index:1}
+
+/* Tabs */
+.auth-tabs{display:flex;position:relative;padding:.5rem .5rem 0;gap:.25rem}
+.auth-tabs::after{content:'';position:absolute;bottom:0;left:1.4rem;right:1.4rem;height:1px;background:var(--border)}
+
+.auth-tab{flex:1;position:relative;z-index:1;background:transparent;border:none;padding:.75rem 1rem;font-family:var(--f-head);font-size:.82rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text-3);cursor:pointer;border-radius:var(--radius) var(--radius) 0 0;transition:color .25s}
+.auth-tab:hover{color:var(--text-2)}
+.auth-tab.active{color:var(--accent)}
+
+.auth-tab-indicator{position:absolute;bottom:0;height:2px;border-radius:99px;background:var(--accent);box-shadow:0 0 10px rgba(200,255,0,.5);transition:left .3s var(--ease-out),width .3s var(--ease-out)}
+
+/* Panels */
+.auth-panels-wrapper{overflow:hidden;transition:height .35s var(--ease-out)}
+.auth-panels-track{display:flex;transition:transform .35s var(--ease-out);will-change:transform}
+.auth-panel{flex:0 0 100%;padding:2rem 2.5rem 2.5rem}
+.auth-panel-sub{font-family:var(--f-mono);font-size:.75rem;color:var(--text-2);line-height:1.6;margin-bottom:1.8rem}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}

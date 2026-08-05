@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FORMANDO PALABRAS</title>
+  <meta http-equiv="X-Content-Type-Options"  content="nosniff" />
+  <meta http-equiv="X-Frame-Options"         content="DENY" />
+  <meta http-equiv="Referrer-Policy"         content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Permissions-Policy"      content="camera=(), microphone=(), geolocation=()" />
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self' https://*.supabase.co;
+             script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com;
+             style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+             font-src 'self' https://fonts.gstatic.com;
+             connect-src 'self' https://*.supabase.co;
+             img-src 'self' data:;" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Space+Mono:wght@400;700&family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/auth.css" />
+  <link rel="stylesheet" href="css/main.css" />
+</head>
+<body>
+
+<div class="ambient" aria-hidden="true">
+  <div class="ambient-blob ambient-blob-1"></div>
+  <div class="ambient-blob ambient-blob-2"></div>
+  <div class="ambient-blob ambient-blob-3"></div>
+</div>
+
+<div class="loader-overlay" id="loader">
+  <div class="loader-logo">FP</div>
+  <div class="loader-ring"></div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<!-- PAGE AUTH -->
+<div class="page active" id="page-auth">
+  <div class="auth-wrap">
+    <div class="auth-brand">
+      <div class="auth-brand-logo">FORMANDO PALABRAS</div>
+      <div class="auth-brand-tag">Cada combinación es única &bull; 5,429,503,678,976 posibles</div>
+    </div>
+    <div class="auth-card">
+      <div class="auth-card-topline"></div>
+      <div class="auth-tabs" role="tablist">
+        <button class="auth-tab active" id="tab-login" role="tab" aria-selected="true">Iniciar sesión</button>
+        <button class="auth-tab" id="tab-register" role="tab" aria-selected="false">Registrarse</button>
+        <div class="auth-tab-indicator" id="tab-indicator"></div>
+      </div>
+      <div class="auth-panels-wrapper" id="auth-wrapper">
+        <div class="auth-panels-track" id="auth-track">
+
+          <!-- LOGIN -->
+          <div class="auth-panel" id="panel-login">
+            <p class="auth-panel-sub">Ingresa el correo con el que te registraste y accede a tu cuenta.</p>
+            <div class="form-group">
+              <label class="form-label" for="login-email">Correo electrónico</label>
+              <input class="form-input" type="email" id="login-email" placeholder="tu@correo.com" autocomplete="email" />
+              <div class="error-msg" id="login-email-error">Ingresa un correo válido.</div>
+            </div>
+            <button class="btn-primary" id="btn-login">Entrar</button>
+            <div class="error-msg" id="login-error" style="margin-top:.8rem;"></div>
+          </div>
+
+          <!-- REGISTRO -->
+          <div class="auth-panel" id="panel-register">
+            <p class="auth-panel-sub">Crea tu cuenta con tu correo y el nombre con el que quieres aparecer.</p>
+            <div class="form-group">
+              <label class="form-label" for="reg-email">Correo electrónico</label>
+              <input class="form-input" type="email" id="reg-email" placeholder="tu@correo.com" autocomplete="email" />
+              <div class="error-msg" id="reg-email-error">Ingresa un correo válido.</div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="reg-name">¿Cómo quieres aparecer?</label>
+              <input class="form-input" type="text" id="reg-name" placeholder="Tu nombre o apodo" maxlength="30" autocomplete="nickname" />
+              <div class="error-msg" id="reg-name-error">El nombre no puede estar vacío.</div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="reg-ref-code">Código de referido <span class="label-optional">(opcional)</span></label>
+              <input class="form-input ref-code-input" type="text" id="reg-ref-code" placeholder="Ej: AB12CD" maxlength="6" autocomplete="off" />
+              <div class="error-msg" id="reg-ref-error">Ese código no existe. Déjalo vacío si no tienes uno.</div>
+            </div>
+            <button class="btn-primary" id="btn-register">Crear cuenta</button>
+            <div class="error-msg" id="register-error" style="margin-top:.8rem;"></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE MAIN -->
+<div class="page" id="page-main">
+  <nav class="nav">
+    <div class="nav-logo">FORMANDO PALABRAS</div>
+    <div class="nav-right">
+      <div class="nav-pill">
+        <div class="nav-pill-dot" aria-hidden="true"></div>
+        <div class="nav-pill-label">Referidos</div>
+        <div class="nav-pill-val" id="referral-count-num">0</div>
+      </div>
+      <div class="nav-user">Hola, <strong id="display-username"></strong></div>
+    </div>
+  </nav>
+  <section class="hero">
+    <div class="hero-eyebrow">Tu combinación del día</div>
+    <div class="hero-title">PRESIONA Y DESCUBRE<br /><em>TU PALABRA</em></div>
+  </section>
+  <div class="letter-stage">
+    <div class="letter-boxes">
+      <div class="letter-box" id="box-0">?</div>
+      <div class="letter-box" id="box-1">?</div>
+      <div class="letter-box" id="box-2">?</div>
+      <div class="letter-box" id="box-3">?</div>
+      <div class="letter-box" id="box-4">?</div>
+      <div class="letter-box" id="box-5">?</div>
+      <div class="letter-box" id="box-6">?</div>
+      <div class="letter-box" id="box-7">?</div>
+      <div class="letter-box" id="box-8">?</div>
+    </div>
+    <button class="btn-form" id="btn-form-word"><span>Formar Palabra</span></button>
+  </div>
+  <div class="dashboard">
+    <div class="dash-card dash-card-referral">
+      <div class="card-header">
+        <div class="card-title">Tu enlace y código de referido</div>
+        <div class="card-badge">Solo lectura</div>
+      </div>
+      <div class="ref-fields">
+        <div class="ref-field-group">
+          <div class="ref-field-label">Enlace de referido</div>
+          <div class="ref-field-row">
+            <div class="ref-field-val" id="ref-link" title="Clic para copiar">Cargando...</div>
+            <button class="btn-copy" id="btn-copy-link">Copiar</button>
+          </div>
+        </div>
+        <div class="ref-field-group">
+          <div class="ref-field-label">Código de referido</div>
+          <div class="ref-field-row">
+            <div class="ref-field-val" id="ref-code" title="Clic para copiar">———</div>
+            <button class="btn-copy" id="btn-copy-code">Copiar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="dash-card">
+      <div class="card-header"><div class="card-title">Tus referidos</div></div>
+      <div class="stat-row">
+        <div class="stat-big" id="stat-referral-big">0</div>
+        <div class="stat-label"><strong>Personas referidas</strong>que se registraron con tu enlace</div>
+      </div>
+    </div>
+    <div class="dash-card">
+      <div class="card-header">
+        <div class="card-title">Tus palabras formadas</div>
+        <div class="card-badge" id="words-count-badge">0 formadas</div>
+      </div>
+      <div class="words-grid" id="words-grid">
+        <span class="words-empty">Aún no has formado ninguna combinación.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/config.js"></script>
+<script src="js/db.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/game.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
