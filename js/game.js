@@ -106,6 +106,7 @@ async function revealStaggered(boxes, letters) {
   try {
     const saved = await dbSaveWord(pendingWord, getCurrentUser().id);
     if (saved) {
+      addWordChip(pendingWord, true);
       showToast(`¡Combinación "${pendingWord}" guardada!`, 'success');
       refreshReferralCount();
     } else {

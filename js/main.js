@@ -63,7 +63,6 @@ async function enterMain() {
 
   setRandomLetters();
   await Promise.all([refreshReferralCount(), loadWordsHistory()]);
-  dbSubscribeWords(user.id, word => addWordChip(word, true));
 
   showPage('page-main');
   showLoader(false);

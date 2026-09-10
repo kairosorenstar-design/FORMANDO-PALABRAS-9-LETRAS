@@ -68,11 +68,3 @@ async function dbSaveWord(combination, userId) {
   return true;
 }
 
-function dbSubscribeWords(userId, onNew) {
-  sb.channel(`words-live-${userId}`)
-    .on('postgres_changes', {
-      event: 'INSERT', schema: 'public', table: 'words',
-      filter: `user_id=eq.${userId}`
-    }, payload => onNew(payload.new.combination))
-    .subscribe();
-}
